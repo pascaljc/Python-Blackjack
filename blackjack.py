@@ -168,20 +168,18 @@ def stand():
 		win('bust')
 
 	#the rest of the cases
-	elif dealer.blackjack == True:
-		if player.blackjack == False: #dealer BJ trumps anything but BJ
-			lose()
-		elif player.blackjack == True:
+	elif dealer.blackjack:
+		if player.blackjack: 
 			push()
-	elif dealer.blackjack == False:
-		if player.blackjack == True: #check trump condition
+		else: lose()  #dealer BJ trumps anything but BJ
+	else:
+		if player.blackjack: #check trump condition
 			win('BJ') #special win condition, 3:2 for BJ
 		elif value(player.hand) > value(dealer.hand): #player has higher val
 			win()
 		elif value(player.hand) < value(dealer.hand): #player has lower val
 			lose()
-		elif value(player.hand) == value(dealer.hand): #true tie
-			push()
+		else: push() #true tie
 	playagain()
 			
 def stand_split():
