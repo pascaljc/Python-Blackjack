@@ -107,7 +107,7 @@ def deal(player_obj,number_of_players):
 def hit(cards):
 	global deck
 	cards.append(deck.stack.pop(0))
-	print "You are 'hit' with the",cards[-1].getCard()
+	print "Hit results in ",cards[-1].getCard()
 		
 def doubledown():
 	global deck, player
