@@ -136,24 +136,19 @@ def stand():
 			print "Dealer busts! You win!!!"
 			print "You win $",player.bet
 			player.cash += 2*player.bet
-			playagain()
 		elif con == 'BJ':
 			print "You won with a blackjack! Blackjack pays 3:2"
 			print "You win $",(3./2)*player.bet
 			player.cash += (5./2)*player.bet
-			playagain()
 		else:
 			print "You won!"
 			print "You win $",player.bet
 			player.cash += 2*player.bet
-			playagain()			
 	def lose():
 		print "You lost!"
-		playagain()
 	def push():
 		print "Push!"
 		player.cash += player.bet
-		playagain()
 	
 	print "The dealer reveals his other card:"
 	print dealer.hand[0].getCard()
@@ -187,6 +182,7 @@ def stand():
 			lose()
 		elif value(player.hand) == value(dealer.hand): #true tie
 			push()
+	playagain()
 			
 def stand_split():
 	return 0
