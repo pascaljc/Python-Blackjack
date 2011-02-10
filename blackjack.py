@@ -366,12 +366,7 @@ def value(cards):
 			return softTotal(cards)
 		else: return hardTotal(cards)
 
-deck = newdeck()
-player.hand.append(deck.stack.pop(0))
-player.hand.append(player.hand[0])
-print player.hand[0].getCard()
-print player.hand[1].getCard()
-split()
+setup()
 
 """-------------------------------------------------
 TODO: GET SPLIT STANDING WORKING. POSSIBLE REWRITE OF STAND.
