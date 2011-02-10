@@ -333,32 +333,25 @@ def intInput(n='',input_message="(Enter a whole number): ",error_message="Please
 
 def value(cards):
 
-	#What about 3 or more aces?
-	
-	def hardTotal(cards):
-		total = 0
-		for item in cards:
-			#print item.suit, item.rank, item.value_hard, item.value_soft
-			total += item.value_hard
-		return total
-
-	def softTotal(cards):
-		total = 0
-		for card in cards:
-			total += card.value_soft
-		return total
-
-	if hardTotal(cards)==softTotal(cards):
-		return hardTotal(cards)
-	elif hardTotal(cards)>softTotal(cards):
-		if hardTotal(cards)-20 == softTotal(cards):
-			#this is the 2 ace case, this is cheating I think.
-			if softTotal(cards)+10 > 21:
-				return softTotal(cards)
-			else: return softTotal(cards) + 10
-		elif hardTotal(cards)>21:
-			return softTotal(cards)
-		else: return hardTotal(cards)
+	# total is a list of every possible sum
+	# at the end total will have 2**a sums, where a is the number of aces in the hand
+	total = [0]
+	for card in cards:
+		if card.value_hard == card.value_soft: # not an ace
+			# add the hard value to each possible sum
+			total = [i + card.value_hard for i in total]
+		else: # the card is an ace, which doubles the list length
+			soft_totals = [i + card.value_soft for i in total]
+			hard_totals = [i + card.value_hard for i in total]
+			total = soft_totals + hard_totals
+	# total now has every possible sum
+	if min(total) > 21:
+		# every sum is greater than 21; insta-bust
+		return min(total)
+	else:
+		# only keep values less than or equal to 21 using an anonymous function
+		total = filter(lambda x: x<=21, total)
+		return max(total)
 
 setup()
 
