@@ -192,8 +192,70 @@ def split():
 	player_split.hand.append(player.hand.pop(-1))
 	hit(player.hand)
 	hit(player_split.hand)
-	return 0
-
+	
+	#hands now played out one at a time
+	#code MOL copied from Main.
+	
+	#Hand 1 GO!
+	
+	while decision == 0:	
+		if len(player.hand)==2:
+			firstpass = True
+			
+		if firstpass:
+			print "Press 1 to hit, 2 to stand, 3 to double down, 4 to surrender."
+			decision = intInput('z',input_message="Please enter 1 thru 4: ")
+			if decision > 4:
+				print "1 thru 4 only."
+		else:
+			while not firstpass:
+				print "Press 1 to hit, 2 to stand"
+				decision = intInput('z',input_message="Please enter 1 or 2: ")
+				if decision > 2:
+					print "1 or 2 only."
+					
+		##work it brother
+		if decision == 1:
+			hit(player.hand)
+			print "Your cards are:"
+			for item in player.hand:
+				print item.getCard()
+			print "Your hand value is",value(player.hand)
+			if value(player.hand) == 21:
+				print "You should stand."
+				decision = 0
+			elif value(player.hand)>21:
+				print "You busted! You lose."
+				print "You lost $",player.bet
+				hand2()  #<-------- PAY ATTENTION HERE
+			else: decision = 0
+		elif decision == 2:
+			print "Standing on hand 1..."
+			hand2() #<-------- PAY ATTENTION HERE
+		elif decision == 3:
+			if player.bet > player.cash-player.bet:
+				print "You can't double down, you don't have enough money."
+				decision = 0
+			else: doubledown()  #<-------- PAY ATTENTION HERE
+		elif decision == 4:
+			yn = ''
+			while yn == '':
+				print """Surrender: Gives up a half bet & retires ("folds")"""
+				print "Are you sure?"
+				yn = raw_input()
+				if yn == 'y':
+					surrender()  #<-------- PAY ATTENTION HERE
+				elif yn == 'n':
+					decision = 0
+				else: 
+					print "Please input y or n only."
+					yn=''
+		else: 
+			decision = 0					
+					
+	def hand2():
+					
+					
 def main():
 	global deck, player, dealer
 	if player.cash <= 0:
