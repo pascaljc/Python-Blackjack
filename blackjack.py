@@ -6,7 +6,9 @@ class Player():
 		self.cash=0
 		self.name=''
 		self.hand=[]
+		self.splithand=[]
 		self.bet=0
+		self.splitbet=0
 		self.blackjack=False		
 class Card():
 	def __init__(self):
@@ -25,7 +27,6 @@ class Deck():
 		return len(self.stack)
 #some so-called 'global' objects to track.
 player = Player()
-player_split = Player()
 dealer = Player(name="Dealer")
 deck = Deck()
 dealprog=0
@@ -253,8 +254,7 @@ def split():
 		else: 
 			decision = 0					
 					
-	def hand2():
-					
+	def hand2():				
 					
 def main():
 	global deck, player, dealer
