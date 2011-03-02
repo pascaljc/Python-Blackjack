@@ -129,7 +129,7 @@ def hit(cards):
 def doubledown(player):
 	player.cash = player.cash-player.bet
 	player.bet = player.bet*2
-	print "You have chosen to double down. Your bet is now $",player.bet
+	print "You have chosen to double down. Your bet is now $",player.betgi
 	hit(player.hand)
 	print "Your cards are:"
 	for item in player.hand:
@@ -137,7 +137,6 @@ def doubledown(player):
 	print "The value is now",value(player.hand)
 	if value(player.hand) > 21:
 		print "You busted! You lose."
-	print player.bet
 	
 def surrender(player):
 	print "You have surrendered."
